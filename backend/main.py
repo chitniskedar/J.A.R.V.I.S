@@ -31,7 +31,8 @@ client = OpenAI(
     base_url="https://openrouter.ai/api/v1"
 )
 
-MODEL = "mistralai/mistral-7b-instruct:free"
+MODEL = "openai/gpt-3.5-turbo"
+
 
 # ---------- MODELS ----------
 
