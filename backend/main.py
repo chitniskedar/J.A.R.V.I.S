@@ -31,7 +31,7 @@ client = OpenAI(
     base_url="https://openrouter.ai/api/v1"
 )
 
-MODEL = "mistralai/mistral-7b-instruct"
+MODEL = "mistralai/mistral-7b-instruct:free"
 
 # ---------- MODELS ----------
 
@@ -55,11 +55,15 @@ def root():
 
 @app.post("/chat")
 def chat(req: ChatRequest):
-    response = client.responses.create(
-        model=MODEL,
-        input=req.message
-    )
-    return {"reply": response.output_text}
+    try:
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[{"role": "user", "content": req.message}]
+        )
+        return {"reply": response.choices[0].message.content}
+    except Exception as e:
+        print("AI ERROR:", e)
+        return {"reply": "AI backend error. Check server logs."}
 
 @app.get("/tasks/{user_id}")
 def list_tasks(user_id: str):
