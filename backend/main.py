@@ -68,3 +68,8 @@ def add_task(req: TaskRequest):
 def done_task(req: DoneRequest):
     task = mark_task_done(req.user_id, req.task_id)
     return {"success": task is not None}
+
+@app.get("/")
+def root():
+    return {"status": "Jarvis backend running"}
+

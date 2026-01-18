@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>J.A.R.V.I.S</title>
+  <link rel="stylesheet" href="/frontend/styles.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>J.A.R.V.I.S</h2>
+
+    <input id="userId" placeholder="User ID">
+    <button onclick="setUser()">Set User</button>
+
+    <input id="taskTitle" placeholder="New task">
+    <button onclick="addTask()">Add</button>
+
+    <ul id="taskList"></ul>
+  </aside>
+
+  <!-- CHAT -->
+  <main class="chat">
+    <div id="chatBox" class="chat-box"></div>
+
+    <div class="input-bar">
+      <input id="message" placeholder="Message Jarvis…">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </main>
+
+</div>
+
+<script src="/frontend/script.js"></script>
+</body>
+</html>
