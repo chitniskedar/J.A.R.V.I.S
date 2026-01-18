@@ -23,8 +23,14 @@ A simple full-stack AI assistant demonstrating communication between a FastAPI b
 - Backend and frontend run independently and communicate over HTTP
 
 ---
+## Tech Stack
 
-## How it works
+- **Backend:** Python, FastAPI  
+- **Frontend:** HTML, CSS, Vanilla JavaScript  
+- **AI API:** OpenRouter (LLM)  
+- **Storage:** JSON (file-based persistence)  
+- **Server:** Uvicorn  
+
 
 1. The frontend sends HTTP requests to the FastAPI backend
 2. The backend processes requests and returns JSON responses
