@@ -1,4 +1,4 @@
-const API = "https://jarvis-production-0594.up.railway.app"
+const API = "https://jarvis-production-0594.up.railway.app";
 let USER_ID = localStorage.getItem("jarvis_user") || ""
 
 /* ---------------- USER ---------------- */
