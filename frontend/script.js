@@ -13,6 +13,7 @@ function setUser() {
 
   localStorage.setItem("jarvis_user", USER_ID)
   loadTasks()
+
 }
 
 /* ---------------- CHAT ---------------- */
