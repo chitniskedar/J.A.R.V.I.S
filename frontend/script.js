@@ -54,8 +54,15 @@ async function sendMessage() {
       })
     })
 
-    const data = await res.json()
-    addMessage("Jarvis", data.reply)
+    if (!res.ok) {
+  const text = await res.text()
+  addMessage("Jarvis", "Backend error: " + text)
+  return
+}
+
+const data = await res.json()
+addMessage("Jarvis", data.reply)
+
   } catch (err) {
     console.error(err)
     addMessage("Jarvis", "Error: " + err.message)
