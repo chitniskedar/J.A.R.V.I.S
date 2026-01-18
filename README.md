@@ -1,40 +1,46 @@
-# J.A.R.V.I.S
+# J.A.R.V.I.S 🤖
 
-A simple full-stack AI assistant demonstrating communication between a FastAPI backend and a browser-based frontend.
+A full-stack AI assistant with chat and task management, inspired by Iron Man’s J.A.R.V.I.S.
 
----
-
-## What this project demonstrates
-
-- FastAPI backend exposing REST APIs
-- Frontend consuming backend APIs using `fetch`
-- AI chat using an external LLM API
-- Basic task management
-- Persistent storage using JSON
-- Local development setup
+This project allows users to chat with an AI and manage personal to-do tasks in one interface.  
+It is fully deployed and publicly accessible.
 
 ---
 
-## Features
+## 🚀 Features
 
-- AI chat endpoint
-- Add, list, and complete tasks
-- User-based task separation
-- Backend and frontend run independently and communicate over HTTP
+- AI chat powered by OpenRouter
+- User-based task management
+- Add, view, and complete tasks
+- Tasks persist across sessions
+- Clean dark UI
+- Fully deployed frontend and backend
 
 ---
-## Tech Stack
 
-- **Backend:** Python, FastAPI  
-- **Frontend:** HTML, CSS, Vanilla JavaScript  
-- **AI API:** OpenRouter (LLM)  
-- **Storage:** JSON (file-based persistence)  
-- **Server:** Uvicorn  
+## 🛠 Tech Stack
 
+### Frontend
+- HTML
+- CSS
+- Vanilla JavaScript
+- Vercel
 
-1. The frontend sends HTTP requests to the FastAPI backend
-2. The backend processes requests and returns JSON responses
-3. The frontend updates the UI based on backend responses
-4. Tasks are stored persistently in a local JSON file
+### Backend
+- Python
+- FastAPI
+- OpenRouter (LLM API)
+- JSON file storage
+- Railway
+
+---
+
+## 🧠 How It Works
+
+- Frontend is hosted on Vercel
+- Backend is hosted on Railway
+- Vercel proxies API requests to avoid CORS issues
+- Tasks are stored per user in a JSON file
+- AI responses are generated using OpenRouter
 
 ---
