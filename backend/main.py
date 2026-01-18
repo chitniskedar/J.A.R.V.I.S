@@ -1,21 +1,30 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from dotenv import load_dotenv
-from pathlib import Path
 import os
 
 from openai import OpenAI
 from tasks import create_task, get_user_tasks, mark_task_done
 
-# ---------- SETUP ----------
+# ---------- APP ----------
 
-load_dotenv(Path(__file__).parent / ".env")
+app = FastAPI()
+
+# ---------- CORS (MUST BE FIRST) ----------
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://jarvis17.vercel.app",
+        "https://jarvis-production-0594.up.railway.app"
+    ],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ---------- OPENROUTER ----------
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
-if not OPENROUTER_API_KEY:
-    raise RuntimeError("OPENROUTER_API_KEY is not set")
 
 client = OpenAI(
     api_key=OPENROUTER_API_KEY,
@@ -24,24 +33,7 @@ client = OpenAI(
 
 MODEL = "mistralai/mistral-7b-instruct"
 
-app = FastAPI()
-
-# ---------- CORS (FIXED FOR VERCEL) ----------
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "https://jarvis17.vercel.app",
-        "https://jarvis-orpin-rho.vercel.app",
-        "http://localhost:5500",
-        "http://127.0.0.1:5500",
-    ],
-    allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# ---------- REQUEST MODELS ----------
+# ---------- MODELS ----------
 
 class ChatRequest(BaseModel):
     user_id: str
@@ -59,15 +51,15 @@ class DoneRequest(BaseModel):
 
 @app.get("/")
 def root():
-    return {"status": "Jarvis backend running"}
+    return {"status": "ok"}
 
 @app.post("/chat")
 def chat(req: ChatRequest):
-    response = client.chat.completions.create(
+    response = client.responses.create(
         model=MODEL,
-        messages=[{"role": "user", "content": req.message}]
+        input=req.message
     )
-    return {"reply": response.choices[0].message.content}
+    return {"reply": response.output_text}
 
 @app.get("/tasks/{user_id}")
 def list_tasks(user_id: str):
