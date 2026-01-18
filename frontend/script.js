@@ -81,52 +81,65 @@ async function addTask() {
   const title = input.value.trim()
   if (!title) return
 
-  await fetch(API + "/tasks", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      user_id: USER_ID,
-      title: title
+  try {
+    const res = await fetch(API + "/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: USER_ID,
+        title: title
+      })
     })
-  })
 
-  input.value = ""
-  loadTasks()
-}
+    if (!res.ok) {
+      console.error("Task add failed", await res.text())
+      return
+    }
 
-window.onload = () => {
-  if (USER_ID) {
-    document.getElementById("userId").value = USER_ID
+    input.value = ""
     loadTasks()
+  } catch (err) {
+    console.error("Task add error:", err)
   }
 }
+
 
 async function loadTasks() {
   if (!USER_ID) return
 
-  const res = await fetch(API + "/tasks/" + USER_ID)
-  const tasks = await res.json()
+  try {
+    const res = await fetch(API + "/tasks/" + USER_ID)
 
-  const list = document.getElementById("taskList")
-  list.innerHTML = ""
+    if (!res.ok) {
+      console.error("Failed to load tasks", await res.text())
+      return
+    }
 
-  tasks.forEach(task => {
-    if (task.done) return // hide completed tasks
+    const tasks = await res.json()
 
-    const li = document.createElement("li")
+    const list = document.getElementById("taskList")
+    list.innerHTML = ""
 
-    li.innerHTML = `
-      <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-        <input 
-          type="checkbox"
-          onchange="doneTask(${task.id})"
-        />
-        <span>${task.title}</span>
-      </label>
-    `
+    tasks.forEach(task => {
+      if (task.done) return
 
-    list.appendChild(li)
-  })
+      const li = document.createElement("li")
+
+      const checkbox = document.createElement("input")
+      checkbox.type = "checkbox"
+      checkbox.onchange = () => doneTask(task.id)
+
+      const span = document.createElement("span")
+      span.innerText = task.title
+
+      li.appendChild(checkbox)
+      li.appendChild(span)
+
+      list.appendChild(li)
+    })
+  } catch (err) {
+    console.error("Task load error:", err)
+  }
 }
 
 async function doneTask(taskId) {
