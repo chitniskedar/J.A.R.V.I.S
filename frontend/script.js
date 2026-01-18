@@ -56,7 +56,8 @@ async function sendMessage() {
     const data = await res.json()
     addMessage("Jarvis", data.reply)
   } catch (err) {
-    addMessage("Jarvis", "Backend not reachable")
+    console.error(err)
+    addMessage("Jarvis", "Error: " + err.message)
   }
 }
 
@@ -119,7 +120,6 @@ async function loadTasks() {
     list.appendChild(li)
   })
 }
-async
 
 async function doneTask(taskId) {
   await fetch(API + "/tasks/done", {
