@@ -1,20 +1,5 @@
 const API = "/api";
-let USER_ID = localStorage.getItem("jarvis_user") || "";
-
-/* ---------------- USER ---------------- */
-
-function setUser() {
-  const input = document.getElementById("userId");
-  USER_ID = input.value.trim();
-
-  if (!USER_ID) {
-    alert("Enter user id first");
-    return;
-  }
-
-  localStorage.setItem("jarvis_user", USER_ID);
-  loadTasks();
-}
+let USER_ID = localStorage.getItem("jarvis_user") || "default_user";
 
 /* ---------------- CHAT ---------------- */
 
@@ -31,12 +16,7 @@ function addMessage(sender, text) {
 }
 
 async function sendMessage() {
-  if (!USER_ID) {
-    alert("Set user first");
-    return;
-  }
-
-  const input = document.getElementById("message");
+  const input = document.getElementById("userInput");
   const text = input.value.trim();
   if (!text) return;
 
@@ -54,8 +34,7 @@ async function sendMessage() {
     });
 
     if (!res.ok) {
-      const errText = await res.text();
-      addMessage("Jarvis", "Backend error: " + errText);
+      addMessage("Jarvis", "Backend error");
       return;
     }
 
@@ -63,20 +42,15 @@ async function sendMessage() {
     addMessage("Jarvis", data.reply);
 
   } catch (err) {
+    addMessage("Jarvis", "Connection error");
     console.error(err);
-    addMessage("Jarvis", "Error: " + err.message);
   }
 }
 
 /* ---------------- TASKS ---------------- */
 
 async function addTask() {
-  if (!USER_ID) {
-    alert("Set user first");
-    return;
-  }
-
-  const input = document.getElementById("taskTitle");
+  const input = document.getElementById("taskInput");
   const title = input.value.trim();
   if (!title) return;
 
@@ -91,12 +65,12 @@ async function addTask() {
     });
 
     if (!res.ok) {
-      console.error("Task add failed:", await res.text());
+      console.error("Task add failed");
       return;
     }
 
     input.value = "";
-    await loadTasks();
+    loadTasks();
 
   } catch (err) {
     console.error("Task add error:", err);
@@ -104,15 +78,9 @@ async function addTask() {
 }
 
 async function loadTasks() {
-  if (!USER_ID) return;
-
   try {
     const res = await fetch(API + "/tasks/" + USER_ID);
-
-    if (!res.ok) {
-      console.error("Task load failed:", await res.text());
-      return;
-    }
+    if (!res.ok) return;
 
     const tasks = await res.json();
     const list = document.getElementById("taskList");
@@ -142,7 +110,7 @@ async function loadTasks() {
 
 async function doneTask(taskId) {
   try {
-    const res = await fetch(API + "/tasks/done", {
+    await fetch(API + "/tasks/done", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -151,13 +119,7 @@ async function doneTask(taskId) {
       })
     });
 
-    if (!res.ok) {
-      console.error("Task done failed:", await res.text());
-      return;
-    }
-
-    await loadTasks();
-
+    loadTasks();
   } catch (err) {
     console.error("Task done error:", err);
   }
@@ -166,8 +128,6 @@ async function doneTask(taskId) {
 /* ---------------- INIT ---------------- */
 
 window.onload = () => {
-  if (USER_ID) {
-    document.getElementById("userId").value = USER_ID;
-    loadTasks();
-  }
+  loadTasks();
+  document.getElementById("sendBtn").onclick = sendMessage;
 };
