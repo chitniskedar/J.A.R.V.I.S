@@ -1,3 +1,4 @@
+/* ===== RESET ===== */
 * {
   box-sizing: border-box;
 }
@@ -5,63 +6,120 @@
 body {
   margin: 0;
   background: radial-gradient(circle at top, #020617, #000);
-  color: #cbd5f5;
+  color: #e5f2ff;
   font-family: "Segoe UI", system-ui, sans-serif;
+  overflow: hidden;
 }
 
 /* ===== LAYOUT ===== */
-
 .layout {
   display: flex;
   height: 100vh;
 }
 
-/* ===== SIDEBAR (JARVIS CORE) ===== */
-
+/* ===== SIDEBAR ===== */
 .sidebar {
-  width: 280px;
+  width: 300px;
   background: linear-gradient(180deg, #020617, #000);
+  border-right: 1px solid rgba(56,189,248,0.3);
   padding: 16px;
-  border-right: 1px solid rgba(56, 189, 248, 0.3);
-  box-shadow: inset -0px 0px 20px rgba(56, 189, 248, 0.15);
   display: flex;
   flex-direction: column;
+  box-shadow: inset -20px 0 40px rgba(56,189,248,0.12);
 }
 
-.sidebar .title {
-  text-align: center;
-  font-size: 22px;
-  font-weight: 700;
+/* ===== LOGO ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.logo-text h2 {
+  margin: 0;
   letter-spacing: 2px;
-  color: #38bdf8;
-  margin-bottom: 18px;
-  text-shadow: 0 0 12px rgba(56,189,248,0.8);
+  color: #7dd3fc;
+  text-shadow: 0 0 12px rgba(56,189,248,0.9);
+}
+
+.logo-text small {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* ===== ARC REACTOR ===== */
+.arc-reactor {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  border: 2px solid #f5c542;
+  box-shadow:
+    0 0 20px rgba(245,197,66,0.9),
+    inset 0 0 12px rgba(245,197,66,0.8);
+  animation: pulseGold 2.5s infinite ease-in-out;
+}
+
+.arc-reactor span {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(245,197,66,0.6);
+  animation: spin 6s linear infinite;
+}
+
+
+.arc-reactor span {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(56,189,248,0.6);
+  animation: spin 6s linear infinite;
+}
+
+.arc-reactor span:nth-child(2) {
+  inset: 12px;
+  animation-duration: 10s;
+}
+
+.arc-reactor span:nth-child(3) {
+  inset: 18px;
+  animation-duration: 14s;
+}
+
+/* ===== PANELS ===== */
+.panel {
+  margin-bottom: 12px;
+  padding: 12px;
+  background: rgba(2,6,23,0.8);
+  border: 1px solid rgba(56,189,248,0.35);
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
 }
 
 .sidebar input,
 .sidebar button {
   width: 100%;
-  margin-bottom: 8px;
   padding: 10px;
-  background: rgba(2,6,23,0.9);
+  margin-bottom: 8px;
+  background: rgba(2,6,23,0.95);
   border: 1px solid rgba(56,189,248,0.4);
   color: #e0f2fe;
   border-radius: 6px;
-  outline: none;
 }
 
 .sidebar button {
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: 0.25s;
 }
 
 .sidebar button:hover {
-  background: rgba(56,189,248,0.15);
-  box-shadow: 0 0 10px rgba(56,189,248,0.5);
+  background: rgba(56,189,248,0.2);
+  box-shadow: 0 0 12px rgba(56,189,248,0.6);
 }
 
-/* ===== TASKS ===== */
-
+/* ===== TASK LIST ===== */
 #taskList {
   list-style: none;
   padding: 0;
@@ -70,40 +128,25 @@ body {
 }
 
 #taskList li {
-  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
   margin-bottom: 6px;
   background: rgba(2,6,23,0.9);
-  border: 1px solid rgba(56,189,248,0.4);
+  border: 1px solid rgba(56,189,248,0.35);
   border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #e0f2fe;
 }
 
-#taskList li button {
-  padding: 4px 8px;
-  font-size: 12px;
-  background: transparent;
-  border: 1px solid #38bdf8;
-  color: #38bdf8;
-}
-
-#taskList li button:hover {
-  background: #38bdf8;
-  color: black;
-}
-
-/* ===== CHAT AREA ===== */
-
+/* ===== CHAT ===== */
 .chat {
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
   background: radial-gradient(circle at center, #020617, #000);
 }
 
-/* HUD GRID EFFECT */
 .chat::before {
   content: "";
   position: absolute;
@@ -116,74 +159,61 @@ body {
 }
 
 /* ===== CHAT BOX ===== */
-
 .chat-box {
   flex: 1;
-  padding: 20px;
+  padding: 24px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 /* ===== MESSAGES ===== */
-
 .message {
   max-width: 70%;
-  margin-bottom: 14px;
   padding: 14px;
+  margin-bottom: 14px;
   border-radius: 10px;
-  line-height: 1.5;
-  animation: fadeIn 0.2s ease-in;
+  animation: fadeIn 0.25s ease;
 }
 
-/* USER (RIGHT) */
 .user {
   align-self: flex-end;
-  margin-left: auto;
-  background: rgba(30,41,59,0.9);
+  background: rgba(30,41,59,0.95);
   border: 1px solid rgba(56,189,248,0.4);
-  box-shadow: 0 0 12px rgba(56,189,248,0.3);
-  text-align: right;
 }
 
-/* JARVIS (LEFT) */
 .jarvis {
   align-self: flex-start;
-  margin-right: auto;
   background: rgba(2,6,23,0.95);
   border-left: 3px solid #38bdf8;
   box-shadow: 0 0 18px rgba(56,189,248,0.6);
 }
 
-/* ===== INPUT BAR ===== */
-
+/* ===== INPUT ===== */
 .input-bar {
   display: flex;
-  padding: 12px;
-  border-top: 1px solid rgba(56,189,248,0.4);
+  padding: 14px;
+  border-top: 1px solid rgba(56,189,248,0.35);
   background: rgba(2,6,23,0.95);
 }
 
 .input-bar input {
   flex: 1;
   padding: 12px;
+  border-radius: 6px;
   background: rgba(2,6,23,0.9);
   border: 1px solid rgba(56,189,248,0.4);
   color: #e0f2fe;
-  border-radius: 6px;
-  outline: none;
 }
 
 .input-bar button {
   margin-left: 10px;
   padding: 12px 18px;
-  background: transparent;
   border: 1px solid #38bdf8;
+  background: transparent;
   color: #38bdf8;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s;
 }
 
 .input-bar button:hover {
@@ -193,15 +223,50 @@ body {
 }
 
 /* ===== ANIMATIONS ===== */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 18px rgba(56,189,248,0.8); }
+  50% { box-shadow: 0 0 30px rgba(56,189,248,1); }
+}
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 18px rgba(245,197,66,0.8); }
+  50% { box-shadow: 0 0 32px rgba(245,197,66,1); }
+}
+
 #taskList input[type="checkbox"] {
-  accent-color: #38bdf8; /* Iron Man blue */
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
+  accent-color: #38bdf8;
+}
+
+/* ===== BUTTON VARIANTS ===== */
+
+/* USER BUTTON – CYAN */
+.btn-user {
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+}
+
+.btn-user:hover {
+  background: rgba(56,189,248,0.25);
+  box-shadow: 0 0 14px rgba(56,189,248,0.9);
+}
+
+/* TASK BUTTON – GREEN */
+.btn-task {
+  border: 1px solid #22c55e;
+  color: #22c55e;
+}
+
+.btn-task:hover {
+  background: rgba(34,197,94,0.25);
+  box-shadow: 0 0 14px rgba(34,197,94,0.9);
 }

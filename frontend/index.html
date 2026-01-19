@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>J.A.R.V.I.S</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
 
@@ -11,13 +11,26 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <h2>J.A.R.V.I.S</h2>
 
-    <input id="userId" placeholder="User ID">
-    <button onclick="setUser()">Set User</button>
+    <!-- LOGO -->
+    <div class="logo">
+      <div class="arc-reactor">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="logo-text">
+        <h2>J.A.R.V.I.S</h2>
+      </div>
+    </div>
 
-    <input id="taskTitle" placeholder="New task">
-    <button onclick="addTask()">Add</button>
+    <div class="panel">
+      <input id="userId" placeholder="Enter User ID">
+      <button class="btn-user" onclick="setUser()">Initialize User</button>
+    </div>
+
+    <div class="panel">
+      <input id="taskTitle" placeholder="New task">
+      <button class="btn-task" onclick="addTask()">Add Task</button>
+    </div>
 
     <ul id="taskList"></ul>
   </aside>
@@ -27,7 +40,7 @@
     <div id="chatBox" class="chat-box"></div>
 
     <div class="input-bar">
-      <input id="message" placeholder="Message Jarvis…">
+      <input id="message" placeholder="Speak to J.A.R.V.I.S…">
       <button onclick="sendMessage()">Send</button>
     </div>
   </main>
