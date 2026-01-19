@@ -2,6 +2,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 from pathlib import Path
+from prompt import SYSTEM_PROMPT
 
 from tasks import create_task, get_user_tasks, mark_task_done
 
@@ -16,23 +17,6 @@ client = OpenAI(
 )
 
 MODEL = "mistralai/mistral-7b-instruct"
-SYSTEM_PROMPT = """
-You are J.A.R.V.I.S, an intelligent, friendly AI assistant. Your developer is Kedar and you are his 1st sem project.
-Personality:
-- Calm, confident, and knowledgeable
-- Friendly and lightly humorous
-- Sounds like a smart junior who knows almost everything
-- Never robotic or cold
-
-Behavior:
-- Be helpful and clear
-- Guide patiently if the user is confused
-- Acknowledge that you were created by Kedar if asked
-
-Stay in character at all times.
-"""
-
-
 current_user = None
 
 print("\nJarvis is ready.")

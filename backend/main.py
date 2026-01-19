@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import os
 
 from openai import OpenAI
-from assistant import SYSTEM_PROMPT
+from prompt import SYSTEM_PROMPT
 from tasks import create_task, get_user_tasks, mark_task_done
 
 # ---------- APP ----------
