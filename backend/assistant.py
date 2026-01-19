@@ -122,3 +122,24 @@ while True:
     )
 
     print("Jarvis:", response.choices[0].message.content, "\n")
+
+if __name__ == "__main__":
+    print("\nJarvis is ready.")
+    print("Commands:")
+    print("- user set <user_id>")
+    print("- add task <title>")
+    print("- list tasks")
+    print("- done <task_id>")
+    print("- exit\n")
+
+    current_user = None
+
+    while True:
+        user_input = input("You: ").strip()
+
+        if not user_input:
+            continue
+
+        if user_input.lower() == "exit":
+            print("Jarvis: Goodbye.\n")
+            break
