@@ -4,6 +4,7 @@ from pydantic import BaseModel
 import os
 
 from openai import OpenAI
+from backend.assistant import SYSTEM_PROMPT
 from tasks import create_task, get_user_tasks, mark_task_done
 
 # ---------- APP ----------
@@ -59,12 +60,16 @@ def chat(req: ChatRequest):
     try:
         response = client.chat.completions.create(
             model=MODEL,
-            messages=[{"role": "user", "content": req.message}]
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": req.message}
+            ]
         )
         return {"reply": response.choices[0].message.content}
     except Exception as e:
         print("AI ERROR:", e)
         return {"reply": "AI backend error. Check server logs."}
+
 
 @app.get("/tasks/{user_id}")
 def list_tasks(user_id: str):
