@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
-
 from openai import OpenAI
 from prompt import SYSTEM_PROMPT
 from tasks import create_task, get_user_tasks, mark_task_done

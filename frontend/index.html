@@ -2,69 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JARVIS Interface</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <title>J.A.R.V.I.S</title>
+  <link rel="stylesheet" href="/frontend/styles.css">
 </head>
 <body>
-  <!-- HUD Scanline Overlay -->
-  <div class="scanlines"></div>
 
-  <div class="layout">
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="brand-container">
-        <div class="arc-container">
-          <div class="arc-reactor">
-            <div class="inner-ring"></div>
-            <div class="core"></div>
-            <div class="spark"></div>
-          </div>
-        </div>
-        <div class="brand-text">
-          <span class="jarvis-title">JARVIS</span>
-          <span class="status-tag">SYSTEM ONLINE</span>
-        </div>
-      </div>
+<div class="layout">
 
-      <div class="sidebar-content">
-        <div class="section-label">COMMAND CENTER</div>
-        <input type="text" placeholder="Protocol Name..." id="taskInput">
-        <button onclick="addTask()">INITIALIZE PROTOCOL</button>
-        
-        <div class="section-label">ACTIVE TASKS</div>
-        <ul id="taskList">
-          <!-- Tasks injected here -->
-        </ul>
-      </div>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>J.A.R.V.I.S</h2>
 
-      <div class="system-stats">
-        <div class="stat-bar"><div class="fill" style="width: 85%;"></div></div>
-        <div class="stat-text">CPU LOAD: 12% | MEMORY: 4.2TB</div>
-      </div>
-    </aside>
+    <input id="userId" placeholder="User ID">
+    <button onclick="setUser()">Set User</button>
 
-    <!-- MAIN CHAT -->
-    <main class="chat">
-      <div class="chat-header">
-        <div class="terminal-dots"><span></span><span></span><span></span></div>
-        <div class="current-view">NEURAL INTERFACE V.4.0.2</div>
-      </div>
+    <input id="taskTitle" placeholder="New task">
+    <button onclick="addTask()">Add</button>
 
-      <div class="chat-box" id="chatBox">
-        <div class="message jarvis">
-          Greetings, Stark. All systems are operational. How can I assist you today?
-        </div>
-      </div>
+    <ul id="taskList"></ul>
+  </aside>
 
-      <div class="input-bar">
-        <div class="input-wrapper">
-            <input type="text" id="userInput" placeholder="Enter voice command or type here...">
-            <button id="sendBtn">EXECUTE</button>
-        </div>
-      </div>
-    </main>
-  </div>
+  <!-- CHAT -->
+  <main class="chat">
+    <div id="chatBox" class="chat-box"></div>
+
+    <div class="input-bar">
+      <input id="message" placeholder="Message Jarvis…">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </main>
+
+</div>
+
+<script src="/frontend/script.js"></script>
 </body>
 </html>
