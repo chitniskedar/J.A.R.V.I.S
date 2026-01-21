@@ -1,48 +1,97 @@
 # J.A.R.V.I.S 🤖
 
-https://jarvis17.vercel.app
+J.A.R.V.I.S is a full-stack AI assistant inspired by Iron Man’s J.A.R.V.I.S, built with a focus on clean UX, conversational intelligence, and real backend integration.
 
-A full-stack AI assistant with chat and task management, inspired by Iron Man’s J.A.R.V.I.S.
-
-This project allows users to chat with an AI and manage personal to-do tasks in one interface.  
-It is fully deployed and publicly accessible.
+It combines AI chat, short-term memory, and personal task management — all usable directly from the browser.
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
-- AI chat powered by OpenRouter
-- User-based task management
-- Add, view, and complete tasks
-- Tasks persist across sessions
-- Clean dark UI
-- Fully deployed frontend and backend
+### 🤖 AI Chat
+- Conversational AI powered by OpenRouter
+- Custom personality (friendly, calm, intelligent)
+- Remembers recent conversation context (per user)
+- Typing indicator (“Jarvis is thinking…”)
+- Press **Enter to send** (Shift + Enter for new line)
+
+### ✅ Task Management
+- Add, list, and complete tasks
+- Tasks persist per user
+- Tasks can be controlled via **UI buttons or natural language chat**
+  - `add task buy groceries`
+  - `list tasks`
+  - `done 1`
+
+### 🌐 Fully Deployed
+- Frontend and backend are live
+- No local setup required to try it
 
 ---
 
 ## 🛠 Tech Stack
 
-### Frontend
+**Frontend**
 - HTML
 - CSS
 - Vanilla JavaScript
-- Vercel
+- Deployed on **Vercel**
 
-### Backend
+**Backend**
 - Python
 - FastAPI
 - OpenRouter (LLM API)
-- JSON file storage
-- Railway
+- JSON-based task storage
+- In-memory chat memory
+- Deployed on **Railway**
+
+---
+
+## 📸 Screenshots
+
+### Main Interface
+AI chat with memory, natural language task control, and a Jarvis-inspired UI.
+
+![J.A.R.V.I.S Main UI](screenshots/main-ui.png)
+
+---
+
+## 🌍 Live Demo
+
+Frontend:  
+https://jarvis17.vercel.app  
+
+Backend API:  
+https://jarvis-production-0594.up.railway.app  
+
+> Note: The backend may take a few seconds to wake up after inactivity.
 
 ---
 
 ## 🧠 How It Works
 
 - Frontend is hosted on Vercel
-- Backend is hosted on Railway
-- Vercel proxies API requests to avoid CORS issues
-- Tasks are stored per user in a JSON file
-- AI responses are generated using OpenRouter
+- Backend API runs on Railway
+- Frontend communicates with backend via `/api`
+- Each user has:
+  - short-term conversation memory
+  - their own task list
+- Task-related messages are intercepted and handled before reaching the AI
+
+---
+
+## 📌 Author
+
+Built by **Kedar**
+
+Designed, implemented, debugged, and deployed end-to-end as a full-stack project.
+
+---
+
+⭐ If you like this project, feel free to star the repo!
+
+---
+## License
+MIT
 
 ---
