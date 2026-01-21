@@ -190,4 +190,12 @@ window.onload = () => {
     document.getElementById("userId").value = USER_ID;
     loadTasks();
   }
+
+  const input = document.getElementById("message");
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
 };
