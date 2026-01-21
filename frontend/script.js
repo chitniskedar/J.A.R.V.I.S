@@ -30,6 +30,21 @@ function addMessage(sender, text) {
   box.scrollTop = box.scrollHeight;
 }
 
+/* Typing indicator */
+function showTyping() {
+  const box = document.getElementById("chatBox");
+  const typing = document.createElement("div");
+  typing.className = "message jarvis typing";
+  typing.id = "typing";
+  typing.innerText = "Jarvis is thinking...";
+  box.appendChild(typing);
+  box.scrollTop = box.scrollHeight;
+}
+
+function hideTyping() {
+  document.getElementById("typing")?.remove();
+}
+
 async function sendMessage() {
   if (!USER_ID) {
     alert("Set user first");
@@ -43,6 +58,8 @@ async function sendMessage() {
   addMessage("You", text);
   input.value = "";
 
+  showTyping();
+
   try {
     const res = await fetch(API + "/chat", {
       method: "POST",
@@ -54,15 +71,18 @@ async function sendMessage() {
     });
 
     if (!res.ok) {
+      hideTyping();
       const errText = await res.text();
       addMessage("Jarvis", "Backend error: " + errText);
       return;
     }
 
     const data = await res.json();
+    hideTyping();
     addMessage("Jarvis", data.reply);
 
   } catch (err) {
+    hideTyping();
     console.error(err);
     addMessage("Jarvis", "Error: " + err.message);
   }
