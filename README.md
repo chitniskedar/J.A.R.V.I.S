@@ -52,9 +52,10 @@ It combines AI chat, short-term memory, and personal task management — all usa
 ### Main Interface
 AI chat with memory, natural language task control, and a Jarvis-inspired UI.
 
-![J.A.R.V.I.S Main UI](screenshots/main-ui.png)
+![J.A.R.V.I.S Main UI]
 
----
+---<img width="1919" height="1062" alt="main_ui png" src="https://github.com/user-attachments/assets/6495adf8-f8b2-4c6c-a33d-47f95fbbc0df" />
+
 
 ## 🌍 Live Demo
 
@@ -82,7 +83,7 @@ https://jarvis-production-0594.up.railway.app
 
 ## 📌 Author
 
-Built by **Kedar**
+Built by **Kedar Chitnis**
 
 Designed, implemented, debugged, and deployed end-to-end as a full-stack project.
 
